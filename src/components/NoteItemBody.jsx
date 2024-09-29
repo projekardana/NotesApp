@@ -1,11 +1,12 @@
 import React from "react";
 
 
-function NoteItemBody({header, textarea}){
+function NoteItemBody({title, body, createdAt}){
     return (
-        <div className="note-app__body">
-            <h2 className="note-app__header">{header}</h2>
-            <p className="note-app__textarea">{textarea}</p>
+        <div className="note-app__content">
+            <h3 className="note-app__title">{title}</h3>
+            <p className="note-app__body">{body}</p>
+            <p className="note-app__createdAt">{createdAt}</p>
         </div>
     );
 }

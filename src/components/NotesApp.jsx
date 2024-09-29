@@ -3,12 +3,12 @@ import NoteList from "./NoteList";
 import { getInitialData } from "../utilis/data";
 
 function NotesApp (){
-    const note = getInitialData();
+    const notes = getInitialData();
 
     return (
         <div className="note-app">
             <h1 className="header">Catatan Aktif</h1>
-            <NoteList note={note} />
+            <NoteList notes={notes} />
         </div>
     );
 }
