@@ -89,7 +89,7 @@
     cursor: pointer;
   }
   
-  .notes-list {
+  .note-list {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: minmax(min-content, max-content);
@@ -97,7 +97,7 @@
     margin-bottom: 48px;
   }
   
-  .notes-list__empty-message {
+  .note-list__empty-message {
     text-align: center;
     color: #aaa;
   }
