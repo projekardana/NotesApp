@@ -13,6 +13,7 @@ class NotesApp extends React.Component {
 
     this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
+    this.onArchiveHandler = this.onArchiveHandler.bind(this);
   }
 
   onAddNoteHandler({ title, body }) {
@@ -35,6 +36,14 @@ class NotesApp extends React.Component {
     this.setState({ notes });
   }
 
+  onArchiveHandler(id) {
+    this.setState((prevState) => ({
+      prevState: prevState.notes.map((note) =>
+        note.id === id ? (note.archived = !note.archived) : note
+      ),
+    }));
+  }
+
   render() {
     return (
       <div className="note-app">
@@ -51,9 +60,22 @@ class NotesApp extends React.Component {
             <NoteInput addNote={this.onAddNoteHandler} />
           </div>
           <h2>Catatan Aktif</h2>
-          <NoteList notes={this.state.notes} />
-          {notes.length > 0 ? (
-            <NoteList notes={notes} onDelete={this.onDeleteHandlere} />
+          {this.state.notes.length > 0 ? (
+            <NoteList
+              notes={this.state.notes}
+              onArchive={this.onArchiveHandler}
+              onDelete={this.onDeleteHandler}
+            />
+          ) : (
+            <div className="note-list__empty-message">Tidak ada Catatan.</div>
+          )}
+          <h2>Arsip</h2>
+          {this.state.notes.length > 0 ? (
+            <NoteList
+              notes={this.state.notes}
+              onArchive={this.onArchiveHandler}
+              onDelete={this.onDeleteHandler}
+            />
           ) : (
             <div className="note-list__empty-message">Tidak ada Catatan.</div>
           )}

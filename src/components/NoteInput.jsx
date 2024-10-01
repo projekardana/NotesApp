@@ -40,13 +40,13 @@ class NoteInput extends React.Component {
     return (
       <form className="note-input" onSubmit={this.onSubmitEventHandler}>
         <input
-          type="textarea"
+          type="text"
           placeholder="ini adalah judul ..."
           value={this.state.title}
           onChange={this.onTitleChangeEventHandler}
         />
         <input
-          type="textarea"
+          type="text"
           placeholder="Tuliskan catatanmu disini ..."
           value={this.state.body}
           onChange={this.onBodyChangeEventHandler}
