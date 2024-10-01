@@ -1,15 +1,18 @@
-import React from "react";
-import NoteItemBody from "./NoteItemBody";
-import { showFormattedDate } from "../utilis/data";
+import React from 'react';
+import NoteItemBody from './NoteItemBody';
 
-function NoteItem ({title, body, formattedDate}){
-    return (
-        <div className="note-item">
-            <NoteItemBody title={title} formattedDate={formattedDate} body={body} />
-
+function NoteItem({ title, createdAt, body }) {
+  return (
+    <div className="note-item__title">
+      <NoteItemBody title={title} />
+      <div className="note-item__date">
+        <NoteItem createdAt={createdAt} />
+        <div className="note-item__body">
+          <NoteItem body={body} />
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default NoteItem;
-
