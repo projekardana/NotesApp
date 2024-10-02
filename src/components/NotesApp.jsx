@@ -49,42 +49,44 @@ class NotesApp extends React.Component {
   render() {
     return (
       <div className="note-app">
-        <header className="note-app__header">
-          <h1>Notes</h1>
-          <div className="note-search">
-            <input type="text" placeholder="Cari Catatan ..." />
-          </div>
-        </header>
+        <div className="note-input">
+          <header className="note-app__header">
+            <h1>Notes</h1>
+            <div className="note-search">
+              <input type="text" placeholder="Cari Catatan ..." />
+            </div>
+          </header>
 
-        <main className="note-app__body">
-          <div className="note-input">
-            <h2>Buat Catatan</h2>
-            <NoteInput addNote={this.onAddNoteHandler} />
-          </div>
+          <main className="note-app__body">
+            <div className="note-input">
+              <h2>Buat Catatan</h2>
+              <NoteInput addNote={this.onAddNoteHandler} />
+            </div>
 
-          <h2>Catatan Aktif</h2>
-          {this.state.notes.length > 0 ? (
-            <NoteList
-              status={false}
-              notes={this.state.notes}
-              onArchive={this.onArchiveHandler}
-              onDelete={this.onDeleteHandler}
-            />
-          ) : (
-            <div className="note-list__empty-message">Tidak ada Catatan.</div>
-          )}
-          <h2>Arsip</h2>
-          {this.state.notes.length > 0 ? (
-            <NoteList
-              status={true}
-              notes={this.state.notes}
-              onArchive={this.onArchiveHandler}
-              onDelete={this.onDeleteHandler}
-            />
-          ) : (
-            <div className="note-list__empty-message">Tidak ada Catatan.</div>
-          )}
-        </main>
+            <h2>Catatan Aktif</h2>
+            {this.state.notes.length > 0 ? (
+              <NoteList
+                status={false}
+                notes={this.state.notes}
+                onArchive={this.onArchiveHandler}
+                onDelete={this.onDeleteHandler}
+              />
+            ) : (
+              <div className="note-list__empty-message">Tidak ada Catatan.</div>
+            )}
+            <h2>Arsip</h2>
+            {this.state.notes.length > 0 ? (
+              <NoteList
+                status={true}
+                notes={this.state.notes}
+                onArchive={this.onArchiveHandler}
+                onDelete={this.onDeleteHandler}
+              />
+            ) : (
+              <div className="note-list__empty-message">Tidak ada Catatan.</div>
+            )}
+          </main>
+        </div>
       </div>
     );
   }
