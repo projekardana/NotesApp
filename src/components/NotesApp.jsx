@@ -25,6 +25,8 @@ class NotesApp extends React.Component {
             id: +new Date(),
             title,
             body,
+            createdAt: new Date().toISOString(),
+            archived: false,
           },
         ],
       };
@@ -59,9 +61,11 @@ class NotesApp extends React.Component {
             <h2>Buat Catatan</h2>
             <NoteInput addNote={this.onAddNoteHandler} />
           </div>
+
           <h2>Catatan Aktif</h2>
           {this.state.notes.length > 0 ? (
             <NoteList
+              status={false}
               notes={this.state.notes}
               onArchive={this.onArchiveHandler}
               onDelete={this.onDeleteHandler}
@@ -72,6 +76,7 @@ class NotesApp extends React.Component {
           <h2>Arsip</h2>
           {this.state.notes.length > 0 ? (
             <NoteList
+              status={true}
               notes={this.state.notes}
               onArchive={this.onArchiveHandler}
               onDelete={this.onDeleteHandler}
