@@ -8,6 +8,7 @@ class NoteInput extends React.Component {
     this.state = {
       title: '',
       body: '',
+      charLimit: 50,
     };
 
     this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this);
@@ -37,9 +38,12 @@ class NoteInput extends React.Component {
   }
 
   render() {
+    const charRemaining = this.state.charLimit - this.state.title.length;
     return (
       <form onSubmit={this.onSubmitEventHandler}>
-        <p className="note-input__title__char-limit">Sisa karakter : </p>
+        <p className="note-input__title__char-limit">
+          Sisa karakter : {charRemaining}
+        </p>
         <input
           className="note-input__title"
           type="text"
