@@ -9,11 +9,13 @@ class NotesApp extends React.Component {
 
     this.state = {
       notes: getInitialData(),
+      searchQuery: '',
     };
 
     this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
+    this.SearchChangeHandler = this.onSearchChangeHandler.bin(this);
   }
 
   onAddNoteHandler({ title, body }) {
@@ -46,47 +48,65 @@ class NotesApp extends React.Component {
     }));
   }
 
+  onSearchChangeHandler(event) {
+    this.setState({ searchQuery: event.target.value });
+  }
+
   render() {
+    const filteredActiveNotes = this.state.notes
+      .filter((note) => !note.archived)
+      .filter((note) =>
+        note.title.toLowerCase().includes(this.state.searchQuery.toLowerCase())
+      );
+
+    const filteredArchiveNotes = this.state.notes
+      .filter((note) => !note.archived)
+      .filter((note) =>
+        note.title.toLowerCase.includes(this.state.searchQuery.toLowerCase())
+      );
+
     return (
       <div className="note-app">
-        <div className="note-input">
-          <header className="note-app__header">
-            <h1>Notes</h1>
-            <div className="note-search">
-              <input type="text" placeholder="Cari Catatan ..." />
-            </div>
-          </header>
+        <header className="note-app__header">
+          <h1>Notes</h1>
+          <div className="note-search">
+            <input
+              type="text"
+              placeholder="Cari Catatan ..."
+              value={this.state.searchQuery}
+              onChange={this.onSearchChangeHandler}
+            />
+          </div>
+        </header>
+        <main className="note-app__body">
+          <div className="note-input">
+            <h2>Buat Catatan</h2>
+            <NoteInput addNote={this.onAddNoteHandler} />
+          </div>
 
-          <main className="note-app__body">
-            <div className="note-input">
-              <h2>Buat Catatan</h2>
-              <NoteInput addNote={this.onAddNoteHandler} />
-            </div>
-
-            <h2>Catatan Aktif</h2>
-            {this.state.notes.length > 0 ? (
-              <NoteList
-                status={false}
-                notes={this.state.notes}
-                onArchive={this.onArchiveHandler}
-                onDelete={this.onDeleteHandler}
-              />
-            ) : (
-              <div className="note-list__empty-message">Tidak ada Catatan.</div>
-            )}
-            <h2>Arsip</h2>
-            {this.state.notes.length > 0 ? (
-              <NoteList
-                status={true}
-                notes={this.state.notes}
-                onArchive={this.onArchiveHandler}
-                onDelete={this.onDeleteHandler}
-              />
-            ) : (
-              <div className="note-list__empty-message">Tidak ada Catatan.</div>
-            )}
-          </main>
-        </div>
+          <h2>Catatan Aktif</h2>
+          {this.state.notes.length > 0 ? (
+            <NoteList
+              status={false}
+              notes={this.state.notes}
+              onArchive={this.onArchiveHandler}
+              onDelete={this.onDeleteHandler}
+            />
+          ) : (
+            <div className="note-list__empty-message">Tidak ada Catatan.</div>
+          )}
+          <h2>Arsip</h2>
+          {this.state.notes.length > 0 ? (
+            <NoteList
+              status={true}
+              notes={this.state.notes}
+              onArchive={this.onArchiveHandler}
+              onDelete={this.onDeleteHandler}
+            />
+          ) : (
+            <div className="note-list__empty-message">Tidak ada Catatan.</div>
+          )}
+        </main>
       </div>
     );
   }
