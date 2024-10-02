@@ -2,18 +2,23 @@ import React from 'react';
 import NoteItem from './NoteItem';
 import { showFormattedDate } from '../utilis/data';
 
-function NoteList({ notes, onDelete, onArchive }) {
+function NoteList({ notes, onDelete, onArchive, status }) {
+  const filtered = notes.filter((note) => note.archived === status);
+
   return (
     <div className="note-list">
-      {notes.map((note) => (
-        <NoteItem
-          key={note.id}
-          onDelete={onDelete}
-          onArchive={onArchive}
-          createdAt={showFormattedDate(note.createdAt)}
-          {...note}
-        />
-      ))}
+      {filtered.map(
+        (note) =>
+          note.archived === status && (
+            <NoteItem
+              key={note.id}
+              onDelete={onDelete}
+              onArchive={onArchive}
+              createdAt={showFormattedDate(note.createdAt)}
+              {...note}
+            />
+          )
+      )}
     </div>
   );
 }
