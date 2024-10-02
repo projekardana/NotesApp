@@ -15,7 +15,7 @@ class NotesApp extends React.Component {
     this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onArchiveHandler = this.onArchiveHandler.bind(this);
-    this.SearchChangeHandler = this.onSearchChangeHandler.bind(this);
+    this.onSearchChangeHandler = this.onSearchChangeHandler.bind(this);
   }
 
   onAddNoteHandler({ title, body }) {
@@ -54,11 +54,11 @@ class NotesApp extends React.Component {
 
   render() {
     const filteredActiveNotes = this.state.notes.filter((note) =>
-      this.note.toLowerCase().includes(this.state.searchQuery.toLowerCase())
+      note.title.toLowerCase().includes(this.state.searchQuery.toLowerCase())
     );
 
     const filteredArchiveNotes = this.state.notes.filter((note) =>
-      this.note.toLowerCase().includes(this.state.searchQuery.toLowerCase())
+      note.title.toLowerCase().includes(this.state.searchQuery.toLowerCase())
     );
 
     return (
