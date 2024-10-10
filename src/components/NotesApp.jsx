@@ -81,7 +81,7 @@ class NotesApp extends React.Component {
           </div>
 
           <h2>Catatan Aktif</h2>
-          {this.state.notes.length > 0 ? (
+          {this.state.notes.filter((note) => !note.archived).length > 0 ? (
             <NoteList
               notes={filteredActiveNotes}
               status={false}
@@ -92,7 +92,7 @@ class NotesApp extends React.Component {
             <div className="note-list__empty-message">Tidak ada Catatan.</div>
           )}
           <h2>Arsip</h2>
-          {this.state.notes.length > 0 ? (
+          {this.state.notes.filter((note) => note.archived).length > 0 ? (
             <NoteList
               notes={filteredArchiveNotes}
               status={true}
